@@ -33,14 +33,50 @@ const typeDefs = `#graphql
     progress: Int!
   }
 
+  input CreateCourseInput {
+    title: String!
+    description: String!
+    level: String!
+  }
+
   type Query {
     courses: [Course!]!
+  }
+
+  type Mutation {
+    createCourse(input: CreateCourseInput!): Course!
   }
 `
 
 const resolvers = {
   Query: {
     courses: () => courses,
+  },
+  Mutation: {
+    createCourse: (
+      _: unknown,
+      args: {
+        input: {
+          title: string
+          description: string
+          level: string
+        }
+      },
+    ) => {
+      const newCourse = {
+        id: crypto.randomUUID(),
+        title: args.input.title,
+        description: args.input.description,
+        level: args.input.level,
+        status: 'Draft',
+        studentsCount: 0,
+        progress: 0,
+      }
+
+      courses.push(newCourse)
+
+      return newCourse
+    },
   },
 }
 

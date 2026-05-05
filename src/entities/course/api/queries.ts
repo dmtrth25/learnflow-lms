@@ -13,3 +13,17 @@ export const GET_COURSES = gql`
     }
   }
 `
+
+export const CREATE_COURSE = gql`
+  mutation CreateCourse($input: CreateCourseInput!) {
+    createCourse(input: $input) {
+      id
+      title
+      description
+      level
+      status
+      studentsCount
+      progress
+    }
+  }
+`
