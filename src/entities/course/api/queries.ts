@@ -1,6 +1,6 @@
-import { gql } from '@apollo/client'
+import { graphql } from '@/shared/api/gql'
 
-export const GET_COURSES = gql`
+export const GET_COURSES = graphql(`
   query GetCourses {
     courses {
       id
@@ -12,9 +12,9 @@ export const GET_COURSES = gql`
       progress
     }
   }
-`
+`)
 
-export const CREATE_COURSE = gql`
+export const CREATE_COURSE = graphql(`
   mutation CreateCourse($input: CreateCourseInput!) {
     createCourse(input: $input) {
       id
@@ -26,4 +26,4 @@ export const CREATE_COURSE = gql`
       progress
     }
   }
-`
+`)
